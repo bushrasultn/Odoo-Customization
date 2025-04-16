@@ -1,0 +1,32 @@
+{
+    'name': "SNC Quality",
+    'summary': "SNC Quality Control",
+    'version': '0.1',
+    'application': True,
+    'depends': ['base', 'quality', 'quality_control'],
+
+    # always loaded
+    'data': [
+        'security/ir.model.access.csv',
+        'views/qc_template.xml',
+        'views/view.xml',
+        'views/quality_model.xml',
+        'reports/report_action.xml',
+        'reports/custom_template.xml',
+        'reports/table_header_footer.xml',
+        # 'reports/rcvng_header.xml',
+        # 'reports/seed_header.xml',
+        'reports/seed_template.xml',
+        'reports/granules_template.xml',
+        'reports/raw.xml',
+        'reports/fg_analysis_template.xml',
+        'reports/silica_template.xml',
+        'reports/sample_rcving_manufctrng.xml',
+        # 'reports/toxic_header.xml',
+        'reports/toxic_template.xml',
+        'reports/inspection_report.xml',
+        # 'reports/inspection_footer.xml',
+        # 'reports/picking_bottle.xml',
+    ],
+    'installable': True,
+}

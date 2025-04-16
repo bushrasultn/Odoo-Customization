@@ -1,0 +1,140 @@
+<odoo>
+    <data>
+        <template id="report_silica_report">
+            <t t-call="web.html_container">
+                <t t-call="snc_quality_control.custom_template_silica"/>
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <h2 style="text-align: center;margin-top:0px;margin-bottom:0px;color: black;font-size: 30px;">
+                                Silica Sand Report
+                            </h2>
+                            <div class="row">
+                                <div class="col-4">
+                                    <table class="table table-sm table-borderless">
+                                        <tr class="first_header_font">
+                                            <td class="fw-bold"
+                                                style="white-space:nowrap; width: 48%; font-size: 20px;">Picking Order:
+                                            </td>
+                                            <td class="fw-bold" style="font-size: 20px; width: 48%;">
+                                                <span t-esc="o.picking_id.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr class="first_header_font">
+                                            <td class="fw-bold" style="width: 50%; font-size: 20px;">Product:</td>
+                                            <td class="fw-bold" style="font-size: 20px; width: 48%;">
+                                                <span style="white-space:nowrap;" t-esc="o.product_id.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr class="first_header_font">
+                                            <td class="fw-bold" style="width: 50%; font-size: 20px;">Party Name:</td>
+                                            <td class="fw-bold" style="font-size: 20px; width: 48%;">
+                                                <span style="white-space:nowrap;" t-esc="o.partner_id.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr class="first_header_font">
+                                            <td class="fw-bold" style="width: 50%; font-size: 20px;">Address:</td>
+                                            <td class="fw-bold" style="font-size: 20px; width: 48%;">
+                                                <!--                                                <span style="white-space:nowrap;" t-esc="o.partner_id.name"/>-->
+                                            </td>
+                                        </tr>
+                                        <tr class="first_header_font">
+                                            <td class="fw-bold" style="font-size: 20px;">Vehicle No:</td>
+                                            <td class="fw-bold" style="font-size: 20px;">
+                                                <span t-esc="o.vehicle_no"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-4 offset-5">
+                                    <table class="table table-sm table-borderless">
+                                        <tr class="first_header_font dates-inline">
+                                            <td class="label fw-bold" style="font-size: 18px;">Mfg.Date:</td>
+                                            <td class="value fw-bold" style="font-size: 16px;">
+                                                <t t-if='o.mfg'>
+                                                    <span style="white-space:nowrap;"
+                                                          t-esc="o.mfg.strftime('%d-%m-%y')"/>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                        <tr class="first_header_font dates-inline">
+                                            <td class="label fw-bold" style="font-size: 18px;">Exp.Date:</td>
+                                            <td class="value fw-bold" style="font-size: 16px;">
+                                                <t t-if='o.exp'>
+                                                    <span style="white-space:nowrap;"
+                                                          t-esc="o.exp.strftime('%d-%m-%y')"/>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                        <tr class="first_header_font">
+                                            <td class="fw-bold" style="font-size: 20px;">Bilty No:</td>
+                                            <td class="fw-bold" style="font-size: 20px;">
+                                                <span t-esc="o.bilty_no"/>
+                                            </td>
+                                        </tr>
+                                        <tr class="first_header_font">
+                                            <td class="fw-bold" style="width: 50%; font-size: 20px;">Source Doc:</td>
+                                            <td class="fw-bold" style="font-size: 20px; width: 48%;">
+                                                <span style="white-space:nowrap;" t-esc="o.origin"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:30px;">
+                                <span t-esc="o.note"/>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+        <!--        ......................................SILICA HEADER & FOOTER..........................................-->
+        <template id="custom_template_silica">
+            <t t-set="company" t-value="res_company"/>
+            <div class="header" style="text-align: center; margin-bottom: 20px;">
+                <div class="row" style="border-bottom: 1px solid #000; padding-bottom: 10px; margin-bottom: 10px;">
+                    <div class="col-2">
+                        <t t-set="logo" t-value="company.logo and company.logo.decode('utf-8') or ''"/>
+                        <img t-att-src="'data:image/png;base64,' + logo" style="max-height: 80px;"/>
+                    </div>
+                    <div class="col-8">
+                        <p style="font-size: 24px; font-weight: bold; margin: 0;text-align: center;">
+                            <t t-esc="company.name"/>
+                        </p>
+                        <p style="margin: 0; text-align: center;">
+                            <t t-esc="company.partner_id.street"/>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <t t-raw="content"/>
+            <div class="footer" style="text-align: left; margin-top: 50px; white-space: nowrap;">
+                <p style="font-weight: bold; display: flex; align-items: center; margin-bottom: 50px;">
+                    Remarks:
+                    <span style="display: inline-block; border-bottom: 1px solid black; margin-left: 25px; width: 90%;"></span>
+                </p>
+                <p style="display: inline-block; width: 150px; margin-right: 150px;">
+                    _________________
+                    <br>Checked By:</br>
+                </p>
+                <p style="display: inline-block; width: 150px; margin-right: 150px;">
+                    _________________
+                    <br style="text-align: center">Verified By:</br>
+                </p>
+                <p style="display: inline-block; width: 150px; margin-right: 150px;">
+                    _________________
+                    <br>Approved By:</br>
+                </p>
+                <div style="display: flex; align-items: center; margin: 0 0 2px; font-size: 12px;">
+                    <span>Print By:
+                        <span t-esc="request.env.user.name"/>
+                    </span>
+                    <span style="margin-left: 30px;">Print Date/Time:
+                        <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y %H:%M')"/>
+                    </span>
+                </div>
+            </div>
+        </template>
+    </data>
+</odoo>

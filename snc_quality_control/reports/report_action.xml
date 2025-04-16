@@ -1,0 +1,145 @@
+<odoo>
+    <data>
+        <record id="raw_report_format" model="report.paperformat">
+            <field name="name">Format</field>
+            <field name="default" eval="False"/>
+            <field name="format">custom</field>
+            <field name="page_height">210</field>
+            <field name="page_width">297</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">20</field>
+            <field name="margin_bottom">35</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">15</field>
+            <field name="dpi">90</field>
+        </record>
+        <record id="inspection_report_format" model="report.paperformat">
+            <field name="name">Format</field>
+            <field name="default" eval="False"/>
+            <field name="format">custom</field>
+            <field name="page_height">210</field>
+            <field name="page_width">297</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">20</field>
+            <field name="margin_bottom">25</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">15</field>
+            <field name="dpi">90</field>
+        </record>
+        <record id="analysis_report_format" model="report.paperformat">
+            <field name="name">Format</field>
+            <field name="default" eval="False"/>
+            <field name="format">custom</field>
+            <field name="page_height">210</field>
+            <field name="page_width">297</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">25</field>
+            <field name="margin_bottom">50</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">20</field>
+            <field name="dpi">90</field>
+        </record>
+        <record id="table_report_format" model="report.paperformat">
+            <field name="name">Format</field>
+            <field name="default" eval="False"/>
+            <field name="format">custom</field>
+            <field name="page_height">210</field>
+            <field name="page_width">297</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">25</field>
+            <field name="margin_bottom">48</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">20</field>
+            <field name="dpi">90</field>
+        </record>
+        <record id="action_analysis_report" model="ir.actions.report">
+            <field name="name">Analysis Report</field>
+            <field name="model">quality.check</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="binding_model_id" ref="model_quality_check"/>
+            <field name="report_name">snc_quality_control.report_analysis_report</field>
+            <field name="report_file">snc_quality_control.report_analysis_report</field>
+            <field name="paperformat_id" ref="table_report_format"/>
+        </record>
+        <record id="action_checkpoint_report" model="ir.actions.report">
+            <field name="name">Raw Material Analysis Report</field>
+            <field name="model">quality.check</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="binding_model_id" ref="model_quality_check"/>
+            <field name="report_name">snc_quality_control.report_control_point_id</field>
+            <field name="report_file">snc_quality_control.report_control_point_id</field>
+            <field name="paperformat_id" ref="raw_report_format"/>
+        </record>
+        <record id="action_granules_report" model="ir.actions.report">
+            <field name="name">Granules Analysis Report</field>
+            <field name="model">quality.check</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="binding_model_id" ref="model_quality_check"/>
+            <field name="report_name">snc_quality_control.report_granules_report</field>
+            <field name="report_file">snc_quality_control.report_granules_report</field>
+            <field name="paperformat_id" ref="raw_report_format"/>
+        </record>
+        <record id="action_silica_report" model="ir.actions.report">
+            <field name="name">Silica Report</field>
+            <field name="model">quality.check</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="binding_model_id" ref="model_quality_check"/>
+            <field name="report_name">snc_quality_control.report_silica_report</field>
+            <field name="report_file">snc_quality_control.report_silica_report</field>
+            <field name="paperformat_id" ref="raw_report_format"/>
+        </record>
+        <record id="action_manufacturing_report" model="ir.actions.report">
+            <field name="name">Sample Analysis Report</field>
+            <field name="model">quality.check</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="binding_model_id" ref="model_quality_check"/>
+            <field name="report_name">snc_quality_control.report_manufacturing_report</field>
+            <field name="report_file">snc_quality_control.report_manufacturing_report</field>
+            <field name="paperformat_id" ref="analysis_report_format"/>
+        </record>
+        <record id="action_seed_report" model="ir.actions.report">
+            <field name="name">Seed Report</field>
+            <field name="model">quality.check</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="binding_model_id" ref="model_quality_check"/>
+            <field name="report_name">snc_quality_control.report_seed_report</field>
+            <field name="report_file">snc_quality_control.report_seed_report</field>
+            <field name="paperformat_id" ref="raw_report_format"/>
+        </record>
+        <record id="action_report_toxic_report" model="ir.actions.report">
+            <field name="name">Toxicity Report</field>
+            <field name="model">quality.check</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="binding_model_id" ref="model_quality_check"/>
+            <field name="report_name">snc_quality_control.report_toxic_report</field>
+            <field name="report_file">snc_quality_control.report_toxic_report</field>
+            <field name="paperformat_id" ref="table_report_format"/>
+        </record>
+        <record id="action_inspection_report" model="ir.actions.report">
+            <field name="name">Inspection Report</field>
+            <field name="model">quality.check</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="binding_model_id" ref="model_quality_check"/>
+            <field name="report_name">snc_quality_control.inspection_report</field>
+            <field name="report_file">snc_quality_control.inspection_report</field>
+            <field name="paperformat_id" ref="inspection_report_format"/>
+        </record>
+        <!--        <record id="action_picking_report" model="ir.actions.report">-->
+        <!--            <field name="name">Picking Report</field>-->
+        <!--            <field name="model">quality.check</field>-->
+        <!--            <field name="report_type">qweb-pdf</field>-->
+        <!--            <field name="binding_model_id" ref="model_quality_check"/>-->
+        <!--            <field name="report_name">snc_quality_control.picking_bottle_report</field>-->
+        <!--            <field name="report_file">snc_quality_control.picking_bottle_report</field>-->
+        <!--            <field name="paperformat_id" ref="raw_report_format"/>-->
+        <!--        </record>-->
+    </data>
+</odoo>

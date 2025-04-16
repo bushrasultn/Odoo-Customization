@@ -1,0 +1,89 @@
+<odoo>
+    <data>
+        <template id="custom_header">
+            <t t-set="company" t-value="res_company"/>
+            <div class="header">
+                <table class="table table-sm table-borderless" style="border: 1px solid white;">
+                    <tr>
+                        <!-- Logo Section -->
+                        <td style="width: 30%; text-align: left; vertical-align: middle;">
+                            <t t-set="logo" t-value="company.logo and company.logo.decode('utf-8') or ''"/>
+                            <img t-att-src="'data:image/png;base64,' + logo"
+                                 style="max-height: 80px; margin-top: 0px; margin-bottom: 0px;"/>
+                        </td>
+
+                        <!-- Company Name and Address Section -->
+                        <td style="width: 40%; vertical-align: middle;">
+                            <p class="fw-bold"
+                               style="font-size: 24px; text-align: center; margin-top: 0px; margin-bottom: 0px;"
+                               t-esc="company.name"/>
+                            <p style="margin-top: 0px; margin-bottom: 0px; text-align: center;">
+                                <t t-esc="company.partner_id.street"/>
+                            </p>
+                        </td>
+
+                        <!-- Document Info Section -->
+                        <td style="width: 30%; text-align: right; vertical-align: middle;">
+                            <p style="text-align: left; border: none; margin-top: 0px; margin-bottom: 0px; font-size: 14px;">
+                                Doc ID
+                            </p>
+                            <p style="text-align: left; border: none; margin-top: 0px; margin-bottom: 0px; font-size: 14px;">
+                                Issue Date
+                            </p>
+                            <p style="text-align: left; border: none; margin-top: 0px; margin-bottom: 0px; font-size: 14px;">
+                                Rev.#
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- Underline Section -->
+                <div style="margin-top: 0px;"></div>
+                <span style="display: block; text-decoration: underline; margin: 0 auto; width: 100%;">
+                    ________________________________________________________________________________________________________________________
+                </span>
+            </div>
+            <!-- Footer Section -->
+             <div class="footer">
+                <div style="overflow: hidden; padding: 0 40px;">
+                    <p style="float: left; text-align: left; margin: 0; width: 30%;">
+                        ________________
+                        <br style="text-align:center">Reviewed By<br>Technical Manager</br></br>
+                    </p>
+                    <p style="float: left; text-align: center; margin: 0; width: 40%;">
+<!--                        ________________-->
+<!--                        <br style="text-align:center">Reviewed By TM</br>-->
+                    </p>
+                    <p style="float: right; text-align: right; margin: 0; width: 30%;">
+                        ________________
+                        <br style="text-align:center">Approved By <br>Quality Control</br></br>
+                    </p>
+                </div>
+                <div style="margin-bottom: 0px;"></div>
+                <span style="display: block; text-decoration: underline; margin: 0 auto; width: 100%;">
+                    ___________________________________________________________________________________________________________________________________
+                </span>
+                 <h4 style="font-size: 13px;">Disclaimer:</h4>
+                <ul style="font-size: 12px;">
+                    <li>As the sample is provided by the customers, the responsibility for the integrity of the
+                        sample lies with the customers.
+                    </li>
+                    <li>If the uncertainty of the sample tested is outside regulatory/tolerance limits, the sample
+                        will be declared UNFIT.
+                    </li>
+                    <li>This report or the contents of the test report cannot be used for media campaigns or legal
+                        proceedings.
+                    </li>
+                </ul>
+               <div style="display: flex; align-items: center; margin: 0 0 2px; font-size: 12px;">
+                    <span>Print By:
+                        <span t-esc="request.env.user.name"/>
+                    </span>
+                    <span style="margin-left: 30px;">Print Date/Time:
+                        <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y %H:%M')"/>
+                    </span>
+                </div>
+            </div>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_qc_template_form" model="ir.ui.view">
+            <field name="name">qc.template.form</field>
+            <field name="model">qc.template</field>
+            <field name="arch" type="xml">
+                <tree string="Quality Control Template" editable="bottom">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="action_qc_template" model="ir.actions.act_window">
+            <field name="name">Quality Control Templates</field>
+            <field name="res_model">qc.template</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_qc_template_action" name="Quality Control Templates"
+                  parent="quality_control.menu_quality_configuration" action="action_qc_template" sequence="10"/>
+    </data>
+</odoo>

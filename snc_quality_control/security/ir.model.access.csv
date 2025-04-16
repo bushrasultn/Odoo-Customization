@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_qc.template,access_qc.template,model_qc_template,base.group_user,1,1,1,1
+access_model.points,access_model.points,model_model_points,base.group_user,1,1,1,1

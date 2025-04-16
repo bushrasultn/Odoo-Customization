@@ -1,0 +1,50 @@
+<odoo>
+    <data>
+        <template id="custom_template">
+            <t t-set="company" t-value="res_company"/>
+            <div class="header" style="text-align: center; margin-bottom: 20px;">
+                <div class="row" style="border-bottom: 1px solid #000; padding-bottom: 10px; margin-bottom: 10px;">
+                    <div class="col-2">
+                        <t t-set="logo" t-value="company.logo and company.logo.decode('utf-8') or ''"/>
+                        <img t-att-src="'data:image/png;base64,' + logo" style="max-height: 80px;"/>
+                    </div>
+                    <div class="col-8">
+                        <p style="font-size: 24px; font-weight: bold; margin: 0;text-align: center;">
+                            <t t-esc="company.name"/>
+                        </p>
+                        <p style="margin: 0; text-align: center;">
+                            <t t-esc="company.partner_id.street"/>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <t t-raw="content"/>
+            <div class="footer" style="text-align: left; margin-top: 50px; white-space: nowrap;">
+                <p style="font-weight: bold; display: flex; align-items: center; margin-bottom: 50px;">
+                    Remarks:
+                    <span style="display: inline-block; border-bottom: 1px solid black; margin-left: 25px; width: 90%;"></span>
+                </p>
+                <p style="display: inline-block; width: 150px; margin-right: 150px;">
+                    _______________________
+                    <br>Analyzed By Chemist:</br>
+                </p>
+                <p style="display: inline-block; width: 150px; margin-right: 150px;">
+                    ___________________
+                    <br style="text-align: center">Checked By:</br>
+                </p>
+                <p style="display: inline-block; width: 150px; margin-right: 150px;">
+                   ______________________________
+                    <br>Approved By Q.C Manager:</br>
+                </p>
+                <div style="display: flex; align-items: center; margin: 0 0 2px; font-size: 12px;">
+                    <span>Print By:
+                        <span t-esc="request.env.user.name"/>
+                    </span>
+                    <span style="margin-left: 30px;">Print Date/Time:
+                        <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y %H:%M')"/>
+                    </span>
+                </div>
+            </div>
+        </template>
+    </data>
+</odoo>
