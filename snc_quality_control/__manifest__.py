@@ -3,7 +3,7 @@
     'summary': "SNC Quality Control",
     'version': '0.1',
     'application': True,
-    'depends': ['base', 'quality', 'quality_control'],
+    'depends': ['base', 'quality', 'quality_control','stock','mrp','product'],
 
     # always loaded
     'data': [
