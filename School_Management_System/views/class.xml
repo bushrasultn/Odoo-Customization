@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="school_class_form" model="ir.ui.view">
+            <field name="name">School Classes form</field>
+            <field name="model">school.class</field>
+            <field name="arch" type="xml">
+                <form string="">Class
+                    <header>
+                        <button name="action_new" string="New Class" type="object"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="section"/>
+                            </group>
+                            <group>
+<!--                                <field name="class_ids" string="Class IDs"/>-->
+<!--                                <field name="fee_ids" string="Fees"/>-->
+                                <field name="active" string="Active"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Leaving Certificate" name="Leaving Certificate">
+                                <group>
+                                    <field name="name"/>
+                                </group>
+                            </page>
+                            <page string="Previous Class" name="Previous Class">
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="school_class_tree" model="ir.ui.view">
+            <field name="name">School Classes Tree</field>
+            <field name="model">school.class</field>
+            <field name="arch" type="xml">
+                <tree string="Class">
+                    <field name="name"/>
+                    <field name="section"/>
+<!--                    <field name="class_ids" string="Class IDs"/>-->
+<!--                    <field name="fee_ids" string="Fees"/>-->
+                    <field name="active" string="Active"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="school_class_action" model="ir.actions.act_window">
+            <field name="name">Classes</field>
+            <field name="res_model">school.class</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="class_menu"
+                  name="Classes"
+                  action="school_class_action"
+                  parent="menu_school_management_system_root"
+                  sequence="3"/>
+    </data>
+</odoo>

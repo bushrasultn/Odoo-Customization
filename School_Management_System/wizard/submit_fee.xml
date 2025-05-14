@@ -1,0 +1,33 @@
+<odoo>
+    <record id="view_submit_fee_form" model="ir.ui.view">
+        <field name="name">Submit Form</field>
+        <field name="model">submit.fee.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Submit">
+                <group>
+                    <field name="partners_id"/>
+                    <field name="class_id"/>
+                    <field name="session_id"/>
+<!--                    <field name="student_fee_id"/>-->
+                    <field name="date"/>
+                </group>
+                <footer>
+                    <button name="action_print_report" string="Print Pdf" type="object" class="btn-primary"/>
+                    <button name="action_cancel" string="Cancel" type="object" class="btn-secondary" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_submit_fee" model="ir.actions.act_window">
+        <field name="name">Submit Form</field>
+        <field name="res_model">submit.fee.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="view_submit_fee_form"/>
+    </record>
+
+    <menuitem id="menu_submit_fee"
+              name="Report"
+              parent="menu_school_management_system_root"
+              action="action_submit_fee"/>
+</odoo>

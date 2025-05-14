@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_student_fee_form" model="ir.ui.view">
+            <field name="name">student.fee.form</field>
+            <field name="model">student.fee</field>
+            <field name="arch" type="xml">
+                <form string="Student Fee">
+                    <sheet>
+                        <header>
+                            <button name="action_calculate_fees" string="Calculate Fees" type="object"
+                                    class="oe_highlight"/>
+                        </header>
+                        <group>
+                            <group>
+                                <field name="class_id"/>
+                                <field name="session_id"/>
+                                <field name="date" required="1"/>
+                                <field name="month"/>
+                                <field name="number_of_students"/>
+                                <field name="fee"/>
+                            </group>
+                            <notebook>
+                                <page string="Student Fee">
+                                    <field name="student_line_ids">
+                                        <tree editable="bottom">
+                                            <field name="student_id"/>
+                                            <field name="date"/>
+                                            <field name="amount"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                            </notebook>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_student_fee_tree" model="ir.ui.view">
+            <field name="name">student.fee.tree</field>
+            <field name="model">student.fee</field>
+            <field name="arch" type="xml">
+                <tree string="Fees">
+                    <field name="class_id" domain="[('active', '=', True)]"/>
+                    <field name="session_id" domain="[('active', '=', True)]"/>
+                    <field name="date"/>
+                    <field name="fee"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_student_fee" model="ir.actions.act_window">
+            <field name="name">Student Fee</field>
+            <field name="res_model">student.fee</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_student_fee_tree"/>
+        </record>
+        <menuitem id="menu_student_fee" name="Fee" parent="menu_school_management_system_root"
+                  action="action_student_fee" sequence="6"/>
+    </data>
+</odoo>

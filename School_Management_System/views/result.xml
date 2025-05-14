@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_result_form" model="ir.ui.view">
+            <field name="name">student.result.form</field>
+            <field name="model">student.result</field>
+            <field name="arch" type="xml">
+                <form string="Student Result">
+                    <sheet>
+                        <div>
+                            <h1>
+                                <field name="priority" widget="priority"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="result_id"/>
+                                <field name="student_id"/>
+                                <field name="name"/>
+                                <!--                                <field name="subject"/>-->
+                                <field name="total_marks"/>
+                                <field name="obt_marks"/>
+                                <field name="percentage" readonly="1"/>
+                                <field name="grade" readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Remarks" name="Remarks">
+                                <field name="remark"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="view_student_result_tree" model="ir.ui.view">
+            <field name="name">student.result.tree</field>
+            <field name="model">student.result</field>
+            <field name="arch" type="xml">
+                <tree string="Result">
+                    <field name="name"/>
+                    <field name="obt_marks"/>
+                    <field name="total_marks"/>
+                    <field name="percentage"/>
+                    <field name="grade"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_student_result" model="ir.actions.act_window">
+            <field name="name">Student Results</field>
+            <field name="res_model">student.result</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_student_result_tree"/>
+        </record>
+        <menuitem id="menu_student_result"
+                  name="Result"
+                  parent="menu_school_management_system_root"
+                  action="action_student_result"
+                  sequence="7"/>
+    </data>
+</odoo>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_school_sheet_form" model="ir.ui.view">
+        <field name="name">school.sheet.form</field>
+        <field name="model">school.sheet</field>
+        <field name="arch" type="xml">
+            <form string="School Sheet">
+                <sheet>
+                    <group>
+                        <field name="session_id"/>
+                        <field name="teacher_id"/>
+                        <field name="phone"/>
+                        <field name="qualif"/>
+                    </group>
+                    <notebook>
+                        <page string="Subjects">
+                            <field name="sheet_line_ids">
+                                <tree editable="bottom">
+                                    <field name="class_id"/>
+                                    <field name="subject_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_school_sheet_id" model="ir.actions.act_window">
+        <field name="name">School.Sheet</field>
+        <field name="res_model">school.sheet</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="menu_school_root"
+              name="Configuration"
+              action="action_school_sheet_id"
+              parent="menu_school_management_system_root" sequence="8"/>
+</odoo>

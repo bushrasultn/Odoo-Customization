@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_student">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <style>
+                    /* Set background color for the entire page */
+                    .page {
+                        background-color: #f0f8ff; /* Light Alice Blue color */
+                        padding: 20px; /* Optional padding */
+                    }
+
+                    /* Center-align the report title */
+                    h2 {
+                        text-align: center;
+                    }
+
+                    /* Container for each student's data */
+                    .student-info {
+                        border: 1px solid #ddd;
+                        border-radius: 5px;
+                        padding: 15px;
+                        margin-bottom: 15px;
+                        background-color: #ffffff;
+                    }
+
+                    /* Style for labels and data */
+                    .label {
+                        font-weight: bold;
+                        display: inline-block;
+                        width: 150px;
+                    }
+
+                    .data {
+                        display: inline-block;
+                        margin-left: 10px;
+                    }
+                </style>
+                <div class="page">
+                    <h2>School Management System</h2>
+                    <t t-foreach="docs" t-as="o">
+                        <div class="student-info">
+                            <p>
+                                <span class="label">Name:</span>
+                                <span class="data" t-field="o.name"/>
+                            </p>
+                            <p>
+                                <span class="label">Father Name:</span>
+                                <span class="data" t-field="o.father_name"/>
+                            </p>
+                            <p>
+                                <span class="label">Date of Birth:</span>
+                                <span class="data" t-field="o.date_of_birth"/>
+                            </p>
+                            <p>
+                                <span class="label">Gender:</span>
+                                <span class="data" t-field="o.gender"/>
+                            </p>
+                            <p>
+                                <span class="label">Address:</span>
+                                <span class="data" t-field="o.address"/>
+                            </p>
+                            <p>
+                                <span class="label">Email:</span>
+                                <span class="data" t-field="o.email"/>
+                            </p>
+                            <p>
+                                <span class="label">Admission Date:</span>
+                                <span class="data" t-field="o.admission_date"/>
+                            </p>
+                            <p>
+                                <span class="label">Admission Time:</span>
+                                <span class="data" t-field="o.admission_time"/>
+                            </p>
+                            <p>
+                                <span class="label">Result:</span>
+                                <span class="data" t-field="o.student_id"/>
+                            </p>
+                            <p>
+                                <span class="label">Fee:</span>
+                                <span class="data" t-field="o.student_fee_id"/>
+                            </p>
+                        </div>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="school_session_form" model="ir.ui.view">
+            <field name="name">School session form</field>
+            <field name="model">school.session</field>
+            <field name="arch" type="xml">
+                <form string="">Session
+                    <header>
+                        <button name="%(School_Management_System.action_teacher_management)d" string="Action Button"
+                                help="A Msg will be printed in the log"
+                                confirm="ok"
+                                type="action"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="year"/>
+                            </group>
+                        </group>
+                        <group string="August 2024" name="August_2024">
+                            <field name="price"/>
+                            <field name="quantity"/>
+                            <field name="discount"/>
+                            <field name="total_discount" readonly="1"/>
+                            <field name="total" readonly="1"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="school_session_tree" model="ir.ui.view">
+            <field name="name">School session Tree</field>
+            <field name="model">school.session</field>
+            <field name="arch" type="xml">
+                <tree string="Session">
+                    <field name="year"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="session_action" model="ir.actions.act_window">
+            <field name="name">Session</field>
+            <field name="res_model">school.session</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="Session_menu"
+                  name="Session"
+                  action="session_action"
+                  parent="menu_school_management_system_root"
+                  sequence="3"/>
+    </data>
+</odoo>

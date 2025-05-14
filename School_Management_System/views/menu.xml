@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <menuitem id="menu_school_management_system_root"
+                  name="School Management System"
+                  sequence="0"/>
+    </data>
+</odoo>

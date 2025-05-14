@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_teacher_admin_form" model="ir.ui.view">
+        <field name="name">Teacher Administration Form</field>
+        <field name="model">teacher.admin.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Administration">
+                <group>
+                    <group>
+                        <field name="partners_id"/>
+                        <field name="cnic"/>
+                        <field name="dob"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_update_report" string="Update" type="object" class="btn-primary"/>
+                    <button name="action_cancel" string="Save" type="object" class="btn-primary"
+                            data-hotkey="z"/>
+                    <button special="cancel" data-hotkey="z" string="Discard" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_cancel_admin" model="ir.actions.act_window">
+        <field name="name">Teacher Administration</field>
+        <field name="res_model">teacher.admin.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="view_teacher_admin_form"/>
+    </record>
+    <menuitem id="menu_cancel_admin"
+              name="Administration"
+              parent="menu_school_management_system_root"
+              action="action_cancel_admin"
+              sequence="9"/>
+</odoo>

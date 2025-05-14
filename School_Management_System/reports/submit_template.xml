@@ -1,0 +1,51 @@
+<odoo>
+    <template id="student_fee">
+        <t t-call="web.basic_layout">
+            <t t-call="web.internal_layout">
+                <style>
+                    /* Center-align table headings */
+                    th { text-align: center; }
+                    /* Center-align table data */
+                    td { text-align: center; }
+                    /* Center-align the report title */
+                    h2 { text-align: center; }
+                </style>
+                <div class="page">
+                    <h2>Student Report</h2>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Student</th>
+                                <th>Class</th>
+                                <th>Session</th>
+                                <th>Fees</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="student_fee_data" t-as="fee">
+                                <tr>
+                                    <td>
+                                        <t t-esc="fee['student_name']"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="fee['class']"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="fee['session']"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="fee['fee']"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="fee['date']"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

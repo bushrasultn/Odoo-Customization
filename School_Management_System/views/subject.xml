@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<record id="school_subject_form" model="ir.ui.view">
+            <field name="name">School subject form</field>
+            <field name="model">subject.school</field>
+            <field name="arch" type="xml">
+                <form string="Subject">
+                    <sheet>
+                         <header>
+                    <button name="action_test" string="Update" type="object"/>
+                </header>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="code"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="school_subject_tree" model="ir.ui.view">
+            <field name="name">Subject School Tree</field>
+            <field name="model">subject.school</field>
+            <field name="arch" type="xml">
+                <tree string="Subject">
+                    <field name="name"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="subject_action_id" model="ir.actions.act_window">
+            <field name="name">Subject</field>
+            <field name="res_model">subject.school</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="Subject_menu"
+                  name="Subject"
+                  action="subject_action_id"
+                  parent="menu_school_management_system_root"
+                  sequence="5"/>
+    </data>
+</odoo>
