@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_operation_form" model="ir.ui.view">
+        <field name="name">hospital.operation.form</field>
+        <field name="model">hospital.operation</field>
+        <field name="arch" type="xml">
+            <form string="Hospital Operation">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="doctor_id"/>
+                            <field name="operation_name"/>
+                        </group>
+                        <group>
+                            <field name="reference_record"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_operation_tree" model="ir.ui.view">
+        <field name="name">hospital.operation.tree</field>
+        <field name="model">hospital.operation</field>
+        <field name="arch" type="xml">
+            <tree string="Operations">
+                <field name="doctor_id"/>
+                <field name="operation_name"/>
+                <field name="reference_record"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_operation" model="ir.actions.act_window">
+        <field name="name">Operations</field>
+        <field name="res_model">hospital.operation</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_operation_tree"/>
+    </record>
+
+    <menuitem id="menu_operation_root"
+              name="Operations"
+              action="action_operation"
+              parent="menu_hospital_root"
+              sequence="8"/>
+</odoo>

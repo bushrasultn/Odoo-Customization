@@ -1,0 +1,27 @@
+{
+    'name': "Hospital",
+    'summary': "for testing purpose",
+    'sequence': '-100',
+    'author': "Bushra",
+    'version': '0.1',
+    'application': True,
+    'license': 'LGPL-3',
+    'depends': ['base', 'mail', 'stock', 'report_xlsx'],
+    'data': [
+        # "security/security.xml",
+        "security/ir.model.access.csv",
+        "views/patient_view.xml",
+        "views/parent_menu.xml",
+        "wizard/cancel_appointment.xml",
+        "reports/report.xml",
+        "reports/report_card.xml",
+        "reports/patient_care.xml",
+        "reports/patient_card.xml",
+        # "reports/xlsx.xml",
+        "data/sequence.xml",
+        "views/appointment.xml",
+        "views/appointment_line.xml",
+        "views/operation.xml",
+        "views/res_config_settings.xml",
+    ]
+}

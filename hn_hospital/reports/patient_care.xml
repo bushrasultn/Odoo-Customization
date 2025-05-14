@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_patient">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.internal_layout">
+                    <style>
+                        /* Center-align table headings */
+                        th {
+                        text-align: center;
+                        }
+                        /* Center-align table data */
+                        td {
+                        text-align: center;
+                        }
+                        /* Center-align the report title */
+                        h2 {
+                        text-align: center;
+                        }
+                    </style>
+                    <div class="page">
+                        <h2>Patient Care Report</h2>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Patient Name</th>
+                                    <th>Doctor</th>
+                                    <th>DOB</th>
+                                    <th>Gender</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr>
+                                    <td>
+                                        <span t-field="o.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.doctor_id.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.date_of_birth"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.gender"/>
+                                    </td>
+                                    <td>
+                                        <span t-field="o.description"/>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

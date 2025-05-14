@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="module_category_hospital" model="ir.module.category">
+            <field name="name">Hospital</field>
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_hospital_receptionist" model="res.group">
+            <field name="name">Receptionist</field>
+            <field name="category_id" ref="hn_hospital.module_category_hospital"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="comment">User will access to appointments</field>
+        </record>
+        <record id="group_hospital_doctors" model="res.group">
+            <field name="name">Doctors</field>
+            <field name="category_id" ref="hn_hospital.module_category_hospital"/>
+            <field name="implied_ids" eval="[(4, ref('hn_hospital.group'_hospital_receptionist('base.group_user'))]"/>
+            <field name="comment">User will access to patient details</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_patient_id_card">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.basic_layout">
+                <div class="page" style="padding: 20px;">
+                    <div class="oe_structure"/>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <table class="table table-responsive"
+                                   style="border: 2px solid #333; width: 100%; border-collapse: collapse;">
+                                <tr>
+                                    <td width="30%"
+                                        style="vertical-align: top; padding: 10px; text-align: center; border-right: 2px solid #333;">
+                                        <t t-if="o.image">
+                                            <img t-att-src="'data:image/png;base64,%s' % to_text(o.image)"
+                                                 style="border: 1px solid #ddd; border-radius: 8px;" height="140"
+                                                 width="120"/>
+                                        </t>
+                                        <t t-if="not o.image">
+                                            <img t-att-src="'/web/static/src/img/placeholder.png'"
+                                                 style="border: 1px solid #ddd; border-radius: 8px;" height="140"
+                                                 width="120"/>
+                                        </t>
+                                    </td>
+                                    <td width="70%" style="vertical-align: top; padding: 10px;">
+                                        <table style="width: 100%; border-collapse: collapse;">
+                                            <tr>
+                                                <td style="padding: 5px; width: 40%; border-bottom: 1px solid #ddd;">
+                                                    <strong>Name:</strong>
+                                                </td>
+                                                <td style="padding: 5px; width: 50%; border-bottom: 1px solid #ddd;">
+                                                    <span t-field="o.name"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 5px; width: 40%; border-bottom: 1px solid #ddd;">
+                                                    <strong>Age:</strong>
+                                                </td>
+                                                <td style="padding: 5px; width: 50%; border-bottom: 1px solid #ddd;">
+                                                    <span t-field="o.age"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 5px; width: 40%; border-bottom: 1px solid #ddd;">
+                                                    <strong>Reference:</strong>
+                                                </td>
+
+                                                <td style="padding: 5px; width: 50%; border-bottom: 1px solid #ddd;">
+                                                    <span t-field="o.reference"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+<!--                                        <div>-->
+<!--                                        for creating QR-->
+<!--                                            <img t-att-src="'/report/barcode/QR/' + o.name"-->
+<!--                                        instead of QR u may write code128-->
+<!--                                                 style="width:150px;height:75px" alt="Barcode"/>-->
+<!--                                        </div>-->
+<!--                                        <div>-->
+<!--                                        for creating Barcode-->
+<!--                                            <span t-field="o.name"-->
+<!--                                               t-options="{'widget': 'barcode', 'humanreadable': 1, 'width': 400, 'height': 100}"/>-->
+<!--                                        </div>-->
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

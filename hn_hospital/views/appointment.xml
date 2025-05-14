@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hospital_appointment_form" model="ir.ui.view">
+        <field name="name">hospital.appointment.form</field>
+        <field name="model">hospital.appointment</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" options="{'clickable': '1'}"/>
+                    <button name="action_done" class="fa fa-list btn-success"/>
+                    <button name="action_test" string="Test Button" type="object"/>
+                    <button name="%(hn_hospital.action_hospital_patient)d" string="Action Button"
+                            confirm="Are you sure?" type="action"/>
+                </header>
+                <sheet>
+                    <div>
+                        <h1>
+                            <field name="priority" widget="priority"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="reference" readonly="True"/>
+                            <field name="patient_id"/>
+                            <field name="gender"/>
+                            <field name="date_of_birth"/>
+                            <field name="image"/>
+                            <field name="name"/>
+                            <field name="age"/>
+                            <field name="date_appointment" optional="show"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Prescription" name="prescription">
+                            <field name="prescription" placeholder="Enter your prescription"/>
+                            <group>
+                                <field name="gender"/>
+                            </group>
+                        </page>
+                        <page string="Medical Record" name="medical_record">
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_hospital_appointment_calendar" model="ir.ui.view">
+        <field name="name">hospital.appointment.calendar</field>
+        <field name="model">hospital.appointment</field>
+        <field name="arch" type="xml">
+            <calendar string="Appointments" date_start="date_appointment" color="state">
+                <field name="patient_id"/>
+                <field name="state"/>
+            </calendar>
+        </field>
+    </record>
+
+    <record id="view_hospital_appointment_tree" model="ir.ui.view">
+        <field name="name">hospital.appointment.tree</field>
+        <field name="model">hospital.appointment</field>
+        <field name="arch" type="xml">
+            <tree string="Appointments">
+                <field name="image"/>
+                <field name="name"/>
+                <field name="age"/>
+                <field name="patient_id"/>
+                <field name="state" widget="badge"/>
+                <field name="reference"/>
+                <field name="note"/>
+                <field name="date_appointment"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Kanban View -->
+    <record id="view_hospital_appointment_kanban" model="ir.ui.view">
+        <field name="name">hospital.appointment.kanban</field>
+        <field name="model">hospital.appointment</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <template>
+                    <strong>
+                        <field name="patient_id"/>
+                    </strong>
+                </template>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_hospital_appointment" model="ir.actions.act_window">
+        <field name="name">Appointments</field>
+        <field name="res_model">hospital.appointment</field>
+        <field name="view_mode">tree,form,calendar,kanban</field>
+        <field name="help" type="html">
+            <p class="o_view_no_content_smiling_face">Create Appointment</p>
+        </field>
+    </record>
+
+    <menuitem id="appointment_view_menu"
+              name="Appointments"
+              action="action_hospital_appointment"
+              parent="menu_hospital_root"
+              sequence="2"/>
+</odoo>

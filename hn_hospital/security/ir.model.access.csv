@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access.patient,access_hospital_patient,model_hospital_patient,base.group_user,1,1,1,1
+access.appointment,access_hospital_appointment,model_hospital_appointment,base.group_user,1,1,1,1
+access.appointment.line,access_hospital_appointment_line,model_hospital_appointment_line,base.group_user,1,1,1,1
+access.cancel.appointment.wizard,access_cancel.appointment.wizard,hn_hospital.model_cancel_appointment_wizard,base.group_user,1,1,1,1
+access.hospital.operation,hospital.operation,model_hospital_operation,,1,1,1,1
+access..hospital.operation,access_hospital_operation,model_hospital_operation,base.group_user,1,1,1,1
+
+
