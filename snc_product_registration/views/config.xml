@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Sequence 2: Undertaking -->
+        <record id="view_undertaking_form" model="ir.ui.view">
+            <field name="name">name.undertaking.form</field>
+            <field name="model">name.undertaking</field>
+            <field name="arch" type="xml">
+                <form string="Undertaking Name">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="company_id" readonly="True"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_undertaking_tree" model="ir.ui.view">
+            <field name="name">name.undertaking.tree</field>
+            <field name="model">name.undertaking</field>
+            <field name="arch" type="xml">
+                <tree string="Undertaking Name">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_undertaking" model="ir.actions.act_window">
+            <field name="name">Name Undertaking</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">name.undertaking</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_undertaking_tree"/>
+        </record>
+
+        <menuitem id="menu_undertaking" name="Pest Name Undertaking" parent="menu_config_reg"
+                  action="action_undertaking" sequence="2"/>
+
+        <!-- Sequence 3: Province -->
+        <record id="view_province_form" model="ir.ui.view">
+            <field name="name">province.reg.form</field>
+            <field name="model">province.reg</field>
+            <field name="arch" type="xml">
+                <form string="Province/Department">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="company_id" readonly="True"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_province_tree" model="ir.ui.view">
+            <field name="name">province.reg.tree</field>
+            <field name="model">province.reg</field>
+            <field name="arch" type="xml">
+                <tree string="Province/Department">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_province_reg" model="ir.actions.act_window">
+            <field name="name">Province Registration</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">province.reg</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_province_tree"/>
+        </record>
+
+        <menuitem id="menu_province_reg" name="Pest Province/Department" parent="menu_config_reg"
+                  action="action_province_reg" sequence="3"/>
+
+        <!-- Sequence 4: Form Type -->
+        <record id="view_form_type_form" model="ir.ui.view">
+            <field name="name">form.type.form</field>
+            <field name="model">form.type</field>
+            <field name="arch" type="xml">
+                <form string="Registration Form Type">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="company_id" readonly="True"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_form_type_tree" model="ir.ui.view">
+            <field name="name">form.type.tree</field>
+            <field name="model">form.type</field>
+            <field name="arch" type="xml">
+                <tree string="Registration Form Type">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_form_type" model="ir.actions.act_window">
+            <field name="name">Form Type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">form.type</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_form_type_tree"/>
+        </record>
+
+        <menuitem id="menu_form_type" name="Form Type" parent="menu_config_reg"
+                  action="action_form_type" sequence="4"/>
+
+        <!-- Sequence 5: Origin Country -->
+        <record id="view_origin_form" model="ir.ui.view">
+            <field name="name">origin.reg.form</field>
+            <field name="model">origin.reg</field>
+            <field name="arch" type="xml">
+                <form string="Country of Origin">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="company_id" readonly="True"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_origin_tree" model="ir.ui.view">
+            <field name="name">origin.reg.tree</field>
+            <field name="model">origin.reg</field>
+            <field name="arch" type="xml">
+                <tree string="Country of Origin">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_origin_reg" model="ir.actions.act_window">
+            <field name="name">Origin Registration</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">origin.reg</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_origin_tree"/>
+        </record>
+
+        <menuitem id="menu_origin_reg" name="Country of Origin" parent="menu_config_reg"
+                  action="action_origin_reg" sequence="5"/>
+
+        <!-- Sequence 6: Formulation -->
+        <record id="view_formulation_form" model="ir.ui.view">
+            <field name="name">form.reg.form</field>
+            <field name="model">form.reg</field>
+            <field name="arch" type="xml">
+                <form string="Formulation Category">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="company_id" readonly="True"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_formulation_tree" model="ir.ui.view">
+            <field name="name">form.reg.tree</field>
+            <field name="model">form.reg</field>
+            <field name="arch" type="xml">
+                <tree string="Formulation Category">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_formulation_reg" model="ir.actions.act_window">
+            <field name="name">Formulation Registration</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">form.reg</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_formulation_tree"/>
+        </record>
+
+        <menuitem id="menu_formulation_reg" name="Formulation Category" parent="menu_config_reg"
+                  action="action_formulation_reg" sequence="6"/>
+
+        <!-- Sequence 7: Fertilizer Province -->
+        <record id="view_fert_dept_form" model="ir.ui.view">
+            <field name="name">fertilizer.dept.form</field>
+            <field name="model">fertilizer.dept</field>
+            <field name="arch" type="xml">
+                <form string="Fertilizer Province">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="company_id" readonly="True"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_fert_dept_tree" model="ir.ui.view">
+            <field name="name">fertilizer.dept.tree</field>
+            <field name="model">fertilizer.dept</field>
+            <field name="arch" type="xml">
+                <tree string="Fertilizer Province">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_fert_dept" model="ir.actions.act_window">
+            <field name="name">Fertilizer Province/Department</field>
+            <field name="res_model">fertilizer.dept</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_fert_dept_tree"/>
+        </record>
+               <!-- Sequence 7: Fertilizer Province -->
+        <menuitem id="fertilizer_province_id" name="Fertilizer Province/Department" parent="menu_config_reg"
+                  action="action_fert_dept" sequence="7"/>
+
+        <record id="view_fertilizer_undertaking_form" model="ir.ui.view">
+            <field name="name">fertilizer.undertaking.form</field>
+            <field name="model">fertilizer.undertaking</field>
+            <field name="arch" type="xml">
+                <form string="Fertilizer Name Undertaking">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="company_id" readonly="True"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_fertilizer_undertaking_tree" model="ir.ui.view">
+            <field name="name">fertilizer.undertaking.tree</field>
+            <field name="model">fertilizer.undertaking</field>
+            <field name="arch" type="xml">
+                <tree string="Fertilizer Name Undertaking">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_fertilizer_undertaking" model="ir.actions.act_window">
+            <field name="name">Fertilizer Name Undertaking</field>
+            <field name="res_model">fertilizer.undertaking</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_fertilizer_undertaking_tree"/>
+        </record>
+        <!-- Sequence 8: Fertilizer Undertaking -->
+
+        <menuitem id="fertilizer_undertaking_id" name="Fertilizer Name Undertaking" parent="menu_config_reg"
+                  action="action_fertilizer_undertaking" sequence="8"/>
+
+        <record id="view_dept_form" model="ir.ui.view">
+            <field name="name">depart.reg.form</field>
+            <field name="model">depart.reg</field>
+            <field name="arch" type="xml">
+                <form string="IPO Class">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="company_id" readonly="True"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+          <record id="view_category_name_form" model="ir.ui.view">
+            <field name="name">category.name.form</field>
+            <field name="model">category.name</field>
+            <field name="arch" type="xml">
+                <form string="Category Name">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="company_id" readonly="True"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_category_name_tree" model="ir.ui.view">
+            <field name="name">category.name.tree</field>
+            <field name="model">category.name</field>
+            <field name="arch" type="xml">
+                <tree string="Category Name">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_category_name" model="ir.actions.act_window">
+            <field name="name">Category Names</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">category.name</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_category_name_tree"/>
+        </record>
+                <!-- Sequence 9: Category Names -->
+        <menuitem id="menu_category_name" name="Category Names" parent="menu_config_reg"
+                  action="action_category_name" sequence="9"/>
+
+        <record id="view_dept_tree" model="ir.ui.view">
+            <field name="name">depart.reg.tree</field>
+            <field name="model">depart.reg</field>
+            <field name="arch" type="xml">
+                <tree string="IPO Class">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_department_reg" model="ir.actions.act_window">
+            <field name="name">IPO Class</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">depart.reg</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_dept_tree"/>
+        </record>
+
+        <menuitem id="menu_department_reg" name="IPO Class" parent="menu_config_reg"
+                  action="action_department_reg" sequence="10"/>
+
+        <!-- Sequence 10: ipo stages  -->
+        <record id="view_stage_form" model="ir.ui.view">
+            <field name="name">stage.ipo.form</field>
+            <field name="model">stage.ipo</field>
+            <field name="arch" type="xml">
+                <form string="IPO Stages">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="company_id" readonly="True"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_stage_tree" model="ir.ui.view">
+            <field name="name">stage.ipo.tree</field>
+            <field name="model">stage.ipo</field>
+            <field name="arch" type="xml">
+                <tree string="IPO Stages">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_ipo_stages" model="ir.actions.act_window">
+            <field name="name">IPO Stages</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">stage.ipo</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_stage_tree"/>
+        </record>
+                <!-- Sequence 11: IPO Stages -->
+        <menuitem id="menu_ipo_stages" name="IPO Stages" parent="menu_config_reg"
+                  action="action_ipo_stages" sequence="11"/>
+
+    </data>
+</odoo>
