@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_payment_request" model="res.groups">
+            <field name="name">Payment Instruction Request</field>
+        </record>
+        <record id="view_payment_review" model="res.groups">
+            <field name="name">Payment Instruction Reviewed</field>
+        </record>
+        <record id="view_payment_manager" model="res.groups">
+            <field name="name">Payment Instruction Manager</field>
+        </record>
+        <record id="view_payment_approve" model="res.groups">
+            <field name="name">Payment Instruction Approved</field>
+        </record>
+        <record id="payment_rule" model="ir.rule">
+            <field name="name">Instruction Rules</field>
+            <field ref="model_payment_instruction" name="model_id"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,292 @@
+<data>
+    <template id="report_payment_instruction">
+        <t t-call="web.html_container">
+            <t t-call="snc_payment_instructions.instruction_header_id"/>
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2 style="text-align: center; margin: 20px 0; padding-top: 20px; font-size: 16px; font-weight: bold; color: black;font-size:20px;">
+                        Payment Instruction
+                    </h2>
+                    <style>
+                        .custom-report-tables .table {
+                        font-size: 16px;
+                        }
+                        .custom-report-tables .table td,
+                        .custom-report-tables .table th {
+                        border: none;
+                        background-color: transparent;
+                        }
+                        .custom-report-tables .fw-bold {
+                        font-weight: bold;
+                        }
+                        .custom-report-tables .first-header-font {
+                        text-align: left;
+                        }
+                    </style>
+                    <div class="custom-report-tables">
+                        <div class="row">
+                            <div class="col-4">
+                                <table class="table table-sm table-borderless">
+                                    <t t-foreach="docs" t-as="o">
+                                        <tr class="first-header-font">
+                                            <td class="fw-bold" style="white-space:nowrap;font-size: 16px;">PI No.:</td>
+                                            <td class="fw-bold" style="font-size: 16px;">
+                                                <span t-esc="o.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr class="first-header-font">
+                                            <td class="fw-bold" style="white-space:nowrap;font-size: 16px;">State:</td>
+                                            <td class="fw-bold" style="font-size: 16px;">
+                                                <span t-esc="o.state.capitalize()"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </div>
+                            <div class="col-2"/>
+                            <div class="col-2 offset-2">
+                                <table class="table table-sm table-borderless">
+                                    <t t-foreach="docs" t-as="o">
+                                        <tr class="first-header-font">
+                                            <td class="fw-bold" style="text-align: left">Date:</td>
+                                            <td class="fw-bold" style="text-align: left">
+                                                <t t-if="o.date">
+                                                    <span style="white-space:nowrap;"
+                                                          t-esc="o.date.strftime('%d-%m-%Y')"/>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <style>
+                        table.table-custom {
+                        width: 100%;
+                        margin-top: 0px;
+                        border: 1px solid black;
+                        border-collapse: collapse;
+                        }
+
+                        table.table-custom th,
+                        table.table-custom td {
+                        border: 1px solid black;
+                        font-size: 16px;
+                        padding: 5px;
+                        }
+
+                        table.table-custom th {
+                        text-align: center;
+                        font-weight: bold;
+                        text-transform: none;
+                        }
+
+                        table.table-custom td {
+                        text-align: left;
+                        }
+
+                        table.table-custom td.text-right {
+                        text-align: right;
+                        }
+
+                        table.table-custom td.bg-transparent {
+                        background-color: transparent;
+                        }
+
+                        label {
+                        font-size: 16px;
+                        font-weight: bold;
+                        }
+                    </style>
+                    <table class="table table-sm table-bordered table-custom" style="color: black;">
+                        <thead>
+                            <tr>
+                                <th style="text-transform: none;font-size: 16px;color: black;">
+                                    <b>Name</b>
+                                </th>
+                                <th style="text-transform: none;font-size: 16px;color: black;">
+                                    <b>Current Balance</b>
+                                </th>
+                                <th style="text-transform: none;font-size: 16px;color: black;">
+                                    <b>Release Request</b>
+                                </th>
+                                <th style="text-transform: none;font-size: 16px;color: black;">
+                                    <b>Tax</b>
+                                </th>
+                                <th style="text-transform: none;font-size: 16px;color: black;">
+                                    <b>Amount To Pay</b>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="total_amount" t-value="0.0"/>
+                            <t t-foreach="docs" t-as="o">
+                                <tr>
+                                    <td class="text-left">
+                                        <span t-esc="o.party.name"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="o.balance" t-options="{'widget': 'float', 'precision': 1}"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="o.release" t-options="{'widget': 'float', 'precision': 1}"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <t t-if="o.tax">
+                                            <span t-esc="o.tax_amount" t-options="{'widget': 'float', 'precision': 1}"/>
+                                        </t>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-esc="o.amount_pay" t-options="{'widget': 'float', 'precision': 1}"/>
+                                        <t t-set="total_amount" t-value="total_amount + o.amount_pay"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-borderless" style="width: 100%; font-size: 16px;">
+                        <tr>
+                            <td style="width: 50%; padding: 5px;">
+                                <b>Payment Against:</b>
+                                <span t-esc="o.payment_against_inst.capitalize()"/>
+                            </td>
+                            <td style="width: 50%; padding: 5px; text-align: right;">
+                                <b>Total:</b>
+                                <span t-esc="total_amount" t-options="{'widget': 'float', 'precision': 1}"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <t t-if="o.payee">
+                        <label style="margin-top:200px;">Payee Not Registered</label>
+                        <t t-if="o.register_lines">
+                            <table class="table table-sm table-bordered table-custom"
+                                   style="color: black;margin-top:20px;">
+                                <thead>
+                                    <tr>
+                                        <th style="text-transform: none;font-size: 16px;color: black;">
+                                            <b>Title of Account</b>
+                                        </th>
+                                        <th style="text-transform: none;font-size: 16px;color: black;">
+                                            <b>Bank</b>
+                                        </th>
+                                        <th style="text-transform: none;font-size: 16px;color: black;">
+                                            <b>Account Number</b>
+                                        </th>
+                                        <th style="text-transform: none;font-size: 16px;color: black;">
+                                            <b>NTN</b>
+                                        </th>
+                                        <th style="text-transform: none;font-size: 16px;color: black;">
+                                            <b>Payment Method</b>
+                                        </th>
+                                        <th style="text-transform: none;font-size: 16px;color: black;">
+                                            <b>Amount</b>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="total_amount" t-value="0.0"/>
+                                    <t t-foreach="o.register_lines" t-as="line">
+                                        <tr>
+                                            <td class="text-left" style="font-size: 16px;">
+                                                <span t-esc="line.account_title or ''"/>
+                                            </td>
+                                            <td class="text-left" style="font-size: 16px;">
+                                                <span t-esc="line.bank or ''"/>
+                                            </td>
+                                            <td class="text-right" style="font-size: 16px;">
+                                                <span t-esc="line.account_no or ''"/>
+                                            </td>
+                                            <td class="text-right" style="font-size: 16px;">
+                                                <span t-esc="line.ntn or ''"/>
+                                            </td>
+                                            <td class="text-left" style="font-size: 16px;">
+                                                <span t-esc="line.instruction.name or ''"/>
+                                            </td>
+                                            <td class="text-right" style="font-size: 16px;">
+                                                <span t-esc="line.non_payee_amount or ''"
+                                                      t-options="{'widget': 'float', 'precision': 1, 'thousands_sep': ''}"/>
+                                            </td>
+                                            <t t-set="total_amount"
+                                               t-value="total_amount + (line.non_payee_amount or 0.0)"/>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                            <div style="text-align: right;">
+                                <b>Total:</b>
+                                <span t-esc="total_amount"
+                                      t-options="{'widget': 'float', 'precision': 1, 'thousands_sep': ''}"/>
+                            </div>
+                        </t>
+                    </t>
+                    <t t-if="not o.payee">
+                        <label style="margin-top:200px;">In Favour of Cheques Details</label>
+                        <t t-if="o.account_lines">
+                            <table class="table table-sm table-bordered table-custom"
+                                   style="color: black;margin-top:20px;">
+                                <thead>
+                                    <tr>
+                                        <th style="text-transform: none;font-size: 16px;color: black;">
+                                            <b>Title of Account</b>
+                                        </th>
+                                        <th style="text-transform: none;font-size: 16px;color: black;">
+                                            <b>Bank</b>
+                                        </th>
+                                        <th style="text-transform: none;font-size: 16px;color: black;">
+                                            <b>Account Number</b>
+                                        </th>
+                                        <th style="text-transform: none;font-size: 16px;color: black;">
+                                            <b>NTN</b>
+                                        </th>
+                                        <th style="text-transform: none;font-size: 16px;color: black;">
+                                            <b>Payment Method</b>
+                                        </th>
+                                        <th style="text-transform: none;font-size: 16px;color: black;">
+                                            <b>Amount</b>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-set="total_amount" t-value="0.0"/>
+                                    <t t-foreach="o.account_lines" t-as="line">
+                                        <tr>
+                                            <td class="text-left" style="font-size: 16px;">
+                                                <span t-esc="line.account_id.name or ''"/>
+                                            </td>
+                                            <td class="text-left" style="font-size: 16px;">
+                                                <span t-esc="line.bank or ''"/>
+                                            </td>
+                                            <td class="text-right" style="font-size: 16px;">
+                                                <span t-esc="line.account_no or ''"/>
+                                            </td>
+                                            <td class="text-right" style="font-size: 16px;">
+                                                <span t-esc="line.ntn or ''"/>
+                                            </td>
+                                            <td class="text-left" style="font-size: 16px;">
+                                                <span t-esc="line.instruction.name or ''"/>
+                                            </td>
+                                            <td class="text-right" style="font-size: 16px;">
+                                                <span t-esc="line.amount"
+                                                      t-options="{'widget': 'float', 'precision': 2, 'thousands_sep': ','}"/>
+                                            </td>
+                                            <t t-set="total_amount" t-value="total_amount + line.amount"/>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                            <div style="text-align: right;">
+                                <b>Total:</b>
+                                <span t-esc="total_amount"
+                                      t-options="{'widget': 'float', 'precision': 1, 'thousands_sep': ''}"/>
+                            </div>
+                        </t>
+                    </t>
+                    <div class="row" style="margin-top:10px;">Remarks:
+                        <span t-esc="o.note"/>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</data>
