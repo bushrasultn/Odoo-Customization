@@ -1,0 +1,133 @@
+<odoo>
+    <data>
+        <!-- Inward Valuation Form View -->
+        <record id="view_inward_valuation_form" model="ir.ui.view">
+            <field name="name">Inward Valuation Form</field>
+            <field name="model">inward.valuation</field>
+            <field name="arch" type="xml">
+                <form create="false">
+                    <header>
+                        <field name="state" widget="statusbar" readonly="True"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="True"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="cont"/>
+                                <field name="warehouse"/>
+                                <field name="source"/>
+                                <field name="destination"/>
+                            </group>
+                            <group>
+                                <field name="date"/>
+                                <field name="remark"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Lines">
+                                <field name="inward_val_line_ids" readonly="True">
+                                    <tree editable="bottom">
+                                        <field name="product_id" options="{'no_create': False}"/>
+                                        <field name="quantity"/>
+                                        <field name="unit_id"/>
+                                        <field name="specify"/>
+                                        <field name="state"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Inward Valuation Tree View -->
+        <record id="view_inward_valuation_tree" model="ir.ui.view">
+            <field name="name">Inward Valuations</field>
+            <field name="model">inward.valuation</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name" readonly="True"/>
+                    <field name="cont"/>
+                    <field name="warehouse"/>
+                    <field name="doc_type"/>
+                    <field name="inward_records"/>
+                    <field name="inwardable_id"/>
+                    <field name="inward_id"/>
+                    <field name="date"/>
+                    <field name="remark"/>
+                    <field name="state" widget="badge"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Inward Valuation Search View -->
+        <record id="view_inward_valuation_search" model="ir.ui.view">
+            <field name="name">Inward Valuation Search</field>
+            <field name="model">inward.valuation</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="name"/>
+                    <field name="cont"/>
+                    <field name="warehouse"/>
+                    <field name="date"/>
+                    <field name="state"/>
+                    <filter name="filter_state_open" string="Open" domain="[('state', '=', 'open')]"/>
+                    <filter name="filter_state_submitted" string="Submitted" domain="[('state', '=', 'submitted')]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Inward Valuation Action -->
+        <record id="action_inward_valuation" model="ir.actions.act_window">
+            <field name="name">Inward Valuations</field>
+            <field name="res_model">inward.valuation</field>
+            <field name="view_mode">tree,search</field>
+        </record>
+
+        <!-- Inward Valuation Menu -->
+
+
+        <!-- Inward Returnable Valuation Line Tree View -->
+        <record id="view_inward_returnable_valuation_line_tree" model="ir.ui.view">
+            <field name="name">Inward Returnable Valuation Line</field>
+            <field name="model">inward.returnable.valuation.line</field>
+            <field name="arch" type="xml">
+                <tree create="false">
+                    <field name="name" readonly="True"/>
+                    <field name="inward_val_id" readonly="True"/>
+                    <field name="inwardable_id" readonly="True"/>
+                    <field name="cont" readonly="True"/>
+                    <field name="warehouse"/>
+                    <field name="source"/>
+                    <field name="destination"/>
+                    <field name="product_id"/>
+                    <field name="quantity"/>
+                    <field name="specify"/>
+                    <field name="unit_id"/>
+                    <field name="date"/>
+                    <field name="remark"/>
+                    <field name="state" widget="badge"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Inward Returnable Valuation Line Action -->
+        <record id="action_inward_returnable_valuation_line" model="ir.actions.act_window">
+            <field name="name">Inward Returnable Valuation Lines</field>
+            <field name="res_model">inward.returnable.valuation.line</field>
+            <field name="view_mode">tree</field>
+        </record>
+<!--          <menuitem id="menu_inward_valuation" name="Inward Valuations" parent="menu_return_root"-->
+<!--                  action="action_inward_valuation" sequence="6"/>-->
+<!---->
+        <!-- Inward Returnable Valuation Line Menu -->
+<!--        <menuitem id="menu_inward_returnable_valuation_lines" name="Returnable Valuation Line History"-->
+<!--                  parent="menu_inward_valuation" action="action_inward_returnable_valuation_line" sequence="3"/>-->
+
+    </data>
+</odoo>

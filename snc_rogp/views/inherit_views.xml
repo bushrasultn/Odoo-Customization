@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit gate_pass form view -->
+        <record id="gate_pass_form_inherit_id" model="ir.ui.view">
+            <field name="name">Inward</field>
+            <field name="model">gate.pass</field>
+            <field name="inherit_id" ref="view_gate_pass_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='rogp_state']" position="after">
+                    <field name="inward_records"
+                           invisible="doc_type == 'returnable inward' or loc_type == 'vendor'"
+                           readonly="state in ['submitted']"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

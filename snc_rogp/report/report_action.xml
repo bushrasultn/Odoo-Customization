@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="blank_report_format" model="report.paperformat">
+            <field name="name">Format</field>
+            <field name="default" eval="False"/>
+            <field name="format">custom</field>
+            <field name="page_height">210</field>
+            <field name="page_width">297</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">20</field>
+            <field name="margin_bottom">25</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">15</field>
+            <field name="dpi">90</field>
+        </record>
+        <record id="action_report_outward" model="ir.actions.report">
+            <field name="name">Outward</field>
+            <field name="model">gate.pass</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">snc_rogp.report_outward</field>
+            <field name="report_file">snc_rogp.report_outward</field>
+            <field name="binding_model_id" ref="model_gate_pass"/>
+            <field name="paperformat_id" ref="snc_rogp.blank_report_format"/>
+
+        </record>
+        <record id="action_report_inward" model="ir.actions.report">
+            <field name="name">Inward</field>
+            <field name="model">gate.pass</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">snc_rogp.report_inward</field>
+            <field name="report_file">snc_rogp.report_inward</field>
+            <field name="binding_model_id" ref="model_gate_pass"/>
+            <field name="paperformat_id" ref="snc_rogp.blank_report_format"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+       <record id="rogp_security_rule_id" model="ir.rule">
+            <field name="name">ROGP Rule</field>
+            <field ref="model_gate_pass" name="model_id"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+
+        <record id="return_location_rule_id" model="ir.rule">
+            <field name="name">Return Location Rule</field>
+            <field ref="model_return_location" name="model_id"/>
+            <field name="domain_force">['|',('warehouse', 'in', user.allowed_warehouse_id.ids), ('is_transit', '=', True)]</field>
+        </record>
+
+    </data>
+</odoo>

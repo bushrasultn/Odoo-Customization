@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+        <record id="action_gate_pass_inward" model="ir.actions.act_window">
+            <field name="name">Inward</field>
+            <field name="res_model">gate.pass</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_doc_type': 'returnable inward', 'default_is_ returnable outward': False}</field>
+            <field name="domain">[('doc_type', '=', 'returnable inward')]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create your Gate Pass.
+                </p>
+            </field>
+        </record>
+        <menuitem id="menu_return_inward"
+                  name="Inward"
+                  parent="menu_return_root"
+                  action="action_gate_pass_inward"
+                  sequence="2"/>
+    </data>
+</odoo>
+

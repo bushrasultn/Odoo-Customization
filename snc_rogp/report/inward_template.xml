@@ -1,0 +1,171 @@
+<data>
+    <template id="report_inward">
+        <t t-call="web.html_container">
+            <t t-call="snc_rogp.outward"/>
+            <t t-call="web.external_layout">
+                <h2 style="text-align: center; margin: 0; padding: 10px; font-size: 16px; font-weight: bold; color: black;">
+                    RETURNABLE INWARD GATEPASS
+                </h2>
+                <style>
+                    .custom-report-tables .table {
+                        font-size: 13px;
+                    }
+                    .custom-report-tables .table td,
+                    .custom-report-tables .table th {
+                        border: none;
+                        background-color: transparent;
+                        font-weight: bold;
+                    }
+                    .custom-report-tables .first-header-font {
+                        text-align: left;
+                    }
+                </style>
+                <div class="custom-report-tables">
+                    <div class="row">
+                        <div class="col-4">
+                            <table class="table table-sm table-borderless" style="margin-top: 10px;">
+                                <t t-foreach="docs" t-as="o">
+                                    <tr class="first-header-font">
+                                        <td class="fw-bold" style="white-space:nowrap;">G.P.O NO.:</td>
+                                        <td class="fw-bold" style="white-space:nowrap;">
+                                            <span t-esc="o.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="first-header-font">
+                                        <td class="fw-bold" style="white-space: nowrap;">Security No.:</td>
+                                        <td class="fw-bold" style="white-space:nowrap;">
+                                            <span t-esc="o.security"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="first-header-font">
+                                        <td class="fw-bold" style="white-space: nowrap;">Source Location:</td>
+                                        <td class="fw-bold" style="white-space:nowrap;">
+                                            <span t-esc="o.source.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="first-header-font">
+                                        <td class="fw-bold">Contact Name:</td>
+                                        <td class="fw-bold" style="white-space:nowrap;">
+                                            <span t-esc="o.cont.name"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </table>
+                        </div>
+                        <div class="col-2"/>
+                        <div class="col-4 offset-2">
+                            <table class="table table-sm table-borderless">
+                                <t t-foreach="docs" t-as="o">
+                                    <tr class="first-header-font">
+                                        <td class="fw-bold">Date:</td>
+                                        <td class="fw-bold" style="white-space:nowrap;">
+                                            <span t-esc="o.date.strftime('%d-%m-%y')"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="first-header-font">
+                                        <td class="fw-bold" style="white-space:nowrap;">Department:</td>
+                                        <td class="fw-bold" style="white-space:nowrap;">
+                                            <span t-esc="o.dept"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="first-header-font">
+                                        <td class="fw-bold" style="white-space:nowrap;">Destination:</td>
+                                        <td class="fw-bold" style="white-space:nowrap;">
+                                            <span t-esc="o.destination.name"/>
+                                        </td>
+                                    </tr>
+                                    <tr class="first-header-font">
+                                        <td class="fw-bold" style="white-space:nowrap;">G.P.O NO.:</td>
+                                        <td class="fw-bold" style="white-space:nowrap;">
+                                            <span t-esc="o.outward_records.name"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <table style="width: 100%; margin-top: 20px; border: 1px solid black; border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center; color: black; border: 1px solid black; padding: 5px; font-size: 12px;">
+                                S.NO.
+                            </th>
+                            <th style="text-align: left; color: black; border: 1px solid black; padding: 5px; font-size: 12px;">
+                                Product Name
+                            </th>
+                            <th style="text-align: center; color: black; border: 1px solid black; padding: 5px; font-size: 12px;">
+                                UOM
+                            </th>
+                            <th style="text-align: center; color: black; border: 1px solid black; padding: 5px; font-size: 12px;">
+                                Qty
+                            </th>
+                            <th style="text-align: center; color: black; border: 1px solid black; padding: 5px; font-size: 12px;">
+                                Specification
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-set="ser" t-value="0"/>
+                        <t t-set="total_qty" t-value="0"/>
+                        <tr t-foreach="docs.product_line_ids" t-as="line">
+                            <t t-set="ser" t-value="ser + 1"/>
+                            <t t-set="total_qty" t-value="total_qty + line.quantity"/>
+                            <td style="text-align: center; border: 1px solid black; padding: 5px; font-size: 12px;">
+                                <span t-esc="ser"/>
+                            </td>
+                            <td style="text-align: left; border: 1px solid black; padding: 5px; font-size: 12px;">
+                                <span t-field="line.product_id.name"/>
+                            </td>
+                            <td style="text-align: center; border: 1px solid black; padding: 5px; font-size: 12px;">
+                                <span t-field="line.unit_id"/>
+                            </td>
+                            <td style="text-align: center; border: 1px solid black; padding: 5px; font-size: 12px;">
+                                <span t-field="line.quantity"/>
+                            </td>
+                            <td style="text-align: center; border: 1px solid black; padding: 5px; font-size: 12px;">
+                                <span t-field="line.specify"/>
+                            </td>
+                        </tr>
+                        <tr style="border-top: 2px solid black; border-bottom: 2px solid black;">
+                            <td colspan="3" style="font-size: 14px; border: 1px solid black; padding: 5px; font-weight: bold;">
+                                Total:
+                            </td>
+                            <td style="text-align: center; font-size: 14px; border: 1px solid black; padding: 5px; font-weight: bold;">
+                                <t t-esc="total_qty"/>
+                            </td>
+                            <td style="border: 1px solid black;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="margin-top: 10px; font-weight: bold;">Remarks:
+                    <span style="text-decoration: underline; margin-left: 25px; font-size: 14px; font-weight: bold;">
+                        ________________________________________________________________________________________________________________________________
+                    </span>
+                </p>
+                <div style="width: 100%; max-width: 100%;">
+                    <div style="text-align: left; float: left; width: 50%; font-size: 12px; padding: 2px 0;">
+                        <p style="margin: 2px 0; font-size: 12px;">
+                            <strong>Vehicle No.:</strong>
+                            <span t-esc="docs.vehicle"/>
+                        </p>
+                        <p style="margin: 2px 0; font-size: 12px;">
+                            <strong>Driver Name:</strong>
+                            <span t-esc="docs.drvr"/>
+                        </p>
+                    </div>
+                    <div style="text-align: right; float: right; width: 50%; font-size: 12px; padding: 2px 0;">
+                        <p style="margin: 2px 0; font-size: 12px;">
+                            <strong>Transporter:</strong>
+                            <span t-esc="docs.trnsprt"/>
+                        </p>
+                        <p style="margin: 2px 0; font-size: 12px;">
+                            <strong>Builty#:</strong>
+                            <span t-esc="docs.builty_no"/>
+                        </p>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</data>
