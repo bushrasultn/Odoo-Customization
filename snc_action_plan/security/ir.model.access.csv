@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access.nap.target,access_nap.target,model_nap_target,base.group_user,1,1,1,1
+access.valuation.target,access_valuation.target,model_valuation_target,base.group_user,1,1,1,1
+access.nap.expense.lines,access_nap.expense.lines,model_nap_expense_lines,base.group_user,1,1,1,1
+access_region_achievement_wizard,region.achievement.wizard,model_region_achievement_wizard,base.group_user,1,1,1,1
+access_territory_wizard,territory.wizard,model_territory_wizard,base.group_user,1,1,1,1
+
+
+
+access.check.list,snc_check.list,model_check_list,base.group_user,1,1,1,1
+access.check.list.line,snc_check_list_line,model_check_list_line,base.group_user,1,1,1,1
+access.event.crop,snc_event_crop,model_event_crop,base.group_user,1,1,1,1
+access.event.check.list,snc_event_check_list,model_event_check_list,base.group_user,1,1,1,1

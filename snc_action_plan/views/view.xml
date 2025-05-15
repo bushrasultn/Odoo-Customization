@@ -1,0 +1,141 @@
+<odoo>
+    <data>
+
+        <!--  Inherits event form and inserts changes  -->
+
+        <record id="view_event_form_inherit" model="ir.ui.view">
+            <field name="name">event.event.form.inherit</field>
+            <field name="model">event.event</field>
+            <field name="inherit_id" ref="event.view_event_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//div[@class='oe_button_box']" position="inside">
+                    <button name="display_expenses" type="object"
+                            class="oe_stat_button" icon="fa-mobile">
+                        <div class="o_stat_info">
+                            <span class="o_stat_text">Expenses</span>
+                        </div>
+                    </button>
+                </xpath>
+
+                <!--  Hides existing fields  -->
+
+                <xpath expr="//field[@name='organizer_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='tag_ids']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='date_tz']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='badge_format']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='badge_image']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='lang']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='event_type_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <!--####################################################################################################-->
+                <xpath expr="//field[@name='address_id']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <!--              ##############################################################-->
+                <xpath expr="//div[field[@name='seats_limited']]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//field[@name='seats_limited']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <xpath expr="//label[@for='seats_limited']" position="replace">
+                </xpath>
+                <xpath expr="//span[field[@name='seats_max']]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <!--                #####################################################################-->
+                <xpath expr="//field[@name='tag_ids']" position="after">
+                    <field name="region_id"/>
+                    <field name="territory_id"/>
+                    <field name="demo_product_ids" widget="many2many_tags"/>
+                    <field name="event_crop_ids" widget="many2many_tags"/>
+                </xpath>
+                <xpath expr="//field[@name='organizer_id']" position="after">
+                    <field name="event_type_id"/>
+                    <field name="emp_id"/>
+                    <field name="cpo_name"/>
+                </xpath>
+
+                <xpath expr="//field[@name='badge_format']" position="after">
+                    <field name="total_expense" invisible="True"/>
+                    <field name="rsm_id"/>
+                    <field name="rsm_verify" widget="boolean_toggle"/>
+                    <field name="verify" widget="boolean_toggle"/>
+                </xpath>
+
+                <!--  Expense page inside notebook  -->
+
+                <xpath expr="//page[@name='tickets']" position="before">
+                    <page string="Expense">
+                        <button type="object" string="Submit Expense"
+                                name="submit_expense" class="oe_highlight"/>
+                        <field name="nap_expense_ids">
+                            <tree editable="bottom">
+                                <field name="expense_category_id" width="200"
+                                       domain="[('can_be_expensed', '=', True)]"/>
+                                <field name="amount" width="200"/>
+                                <field name="description" width="200"/>
+                                <field name="attach_link" width="200"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <!--  Inherits event tree view and inserts changes  -->
+
+        <record id="view_event_tree_inherit" model="ir.ui.view">
+            <field name="name">event.event.tree.inherit</field>
+            <field name="model">event.event</field>
+            <field name="inherit_id" ref="event.view_event_tree"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="verify"/>
+                </xpath>
+
+            </field>
+        </record>
+
+        <!--  Creates Pivot view for event module  -->
+
+        <record id="view_event_event_pivot_custom" model="ir.ui.view">
+            <field name="name">event.event.pivot.custom</field>
+            <field name="model">event.event</field>
+            <field name="arch" type="xml">
+                <pivot string="Event Analysis">
+                    <field name="region_id" type="row"/>
+                    <field name="territory_id" type="row"/>
+                    <field name="date_begin" type="col" interval="month"/>
+                    <field name="event_type_id" type="col"/>
+                </pivot>
+            </field>
+        </record>
+
+    </data>
+</odoo>
+

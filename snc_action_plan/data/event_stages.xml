@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Custom Event stages -->
+
+        <record id="event_stage_verified" model="event.stage">
+            <field name="name">Verified</field>
+            <field name="description">The event and expenses are verified</field>
+            <field name="sequence">10</field>
+        </record>
+
+    </data>
+</odoo>

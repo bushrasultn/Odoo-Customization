@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_achievement_form" model="ir.ui.view">
+        <field name="name">Achievement Form</field>
+        <field name="model">region.achievement.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Region Wise Achievement">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date_from" required="True"/>
+                            <field name="region_id" widget="many2many_tags"
+                                   options="{'no_create': True, 'no_open': True}"/>
+                        </group>
+                        <group>
+                            <field name="date_to"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="view_report" string="View Report"
+                                type="object" class="btn-primary"/>
+                        <button name="download_report" string="Download Report"
+                                type="object" class="btn-primary"/>
+                    </footer>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_cancel_report" model="ir.actions.act_window">
+        <field name="name">Region Wise Achievements</field>
+        <field name="res_model">region.achievement.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="view_achievement_form"/>
+    </record>
+    <menuitem id="menu_achievement"
+              name="Region Wise Report"
+              parent="event.menu_reporting_events"
+              action="action_cancel_report"
+              sequence="12"/>
+</odoo>

@@ -1,0 +1,167 @@
+<odoo>
+    <data>
+        <template id="report_annual_target_achievement">
+            <t t-call="web.html_container">
+                <t t-call="snc_action_plan.custom_header_id"/>
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2 style="text-align: center; margin: 20px 0; padding-top: 20px; font-size: 18px; font-weight: bold; color: black;">
+                            Region Wise Target Achievement Report
+                        </h2>
+
+                        <!-- Date and Print Details -->
+                        <div class="custom-report-tables">
+                            <div class="row">
+                                <div class="col-2">
+                                    <table class="table table-sm table-borderless">
+                                        <tr>
+                                            <td class="p-1">
+                                                <strong>Date From:</strong>
+                                            </td>
+                                            <td class="p-1">
+                                                <t t-esc="date_from"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-1">
+                                                <strong>Date To:</strong>
+                                            </td>
+                                            <td class="p-1">
+                                                <t t-esc="date_to"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-2 offset-4">
+                                    <table class="table table-sm table-borderless">
+                                        <tr>
+                                            <td class="p-1">
+                                                <strong>Print By:</strong>
+                                            </td>
+                                            <td class="p-1">
+                                                <t t-esc="request.env.user.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-1">
+                                                <strong>Print Date/Time:</strong>
+                                            </td>
+                                            <td class="p-1">
+                                                <t t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y %H:%M')"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Target Row -->
+                        <table class="table table-sm table-bordered"
+                               style="color: black; margin-top: 20px; border: 1px solid black; border-collapse: collapse;">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: left; color: black;">Target</th>
+                                    <t t-foreach="event_types" t-as="event_type">
+                                        <t t-set="event_target" t-value="0"/>
+                                        <t t-foreach="target_data" t-as="target">
+                                            <t t-if="target['event_type'] == event_type.name">
+                                                <t t-set="event_target" t-value="target['event_target']"/>
+                                            </t>
+                                        </t>
+                                        <th style="text-align: center; color: black;">
+                                            <t t-esc="event_type.name"/>
+                                            (<t t-esc="event_target"/>)
+                                        </th>
+                                    </t>
+                                </tr>
+                            </thead>
+                        </table>
+
+                        <!-- Target Achievement Table -->
+                        <table class="table table-sm table-bordered"
+                               style="color: black; margin-top: 20px; border: 1px solid black; border-collapse: collapse;">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: left; color:black">Region</th>
+                                    <t t-foreach="event_types" t-as="event_type">
+                                        <th style="text-align: center; color:black">Ach%</th>
+                                        <th style="text-align: center; color:black">
+                                            <t t-esc="event_type.name"/>
+                                        </th>
+                                    </t>
+                                    <th style="text-align: center; color:black">Total Achievement</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="regions" t-as="region">
+                                    <tr>
+                                        <td colspan="100%" style="text-align: left; font-weight: bold;">
+                                            <t t-esc="region.name"/>
+                                        </td>
+                                    </tr>
+                                    <t t-set="region_cumulative_achievements" t-value="0"/>
+                                    <t t-foreach="territories" t-as="territory">
+                                        <t t-if="territory.region_id.id == region.id">
+                                            <tr>
+                                                <td align="left">
+                                                    <t t-esc="territory.name"/>
+                                                </td>
+                                                <t t-foreach="event_types" t-as="event_type">
+                                                    <td align="center">
+                                                        <t t-set="total_target" t-value="0"/>
+                                                        <t t-set="total_achievements" t-value="0"/>
+                                                        <t t-foreach="target_data" t-as="target">
+                                                            <t t-if="target['territory'] == territory.name and target['event_type'] == event_type.name">
+                                                                <t t-set="total_target"
+                                                                   t-value="total_target + target['event_target']"/>
+                                                            </t>
+                                                        </t>
+                                                        <t t-foreach="events" t-as="event">
+                                                            <t t-if="event.territory_id.id == territory.id and event.event_type_id.name == event_type.name">
+                                                                <t t-set="total_achievements"
+                                                                   t-value="total_achievements + 1"/>
+                                                            </t>
+                                                        </t>
+                                                        <t t-if="total_target > 0">
+                                                            <t t-set="achv_percentage"
+                                                               t-value="(total_achievements / total_target) * 100"/>
+                                                            <t t-esc="round(achv_percentage, 2)"/>%
+                                                        </t>
+                                                        <t t-if="total_target == 0">
+                                                            <t t-esc="0"/>%
+                                                        </t>
+                                                    </td>
+                                                    <td align="right">
+                                                        <t t-esc="total_achievements"/>
+                                                    </td>
+                                                </t>
+                                                <td align="right">
+                                                    <t t-set="cumulative_achievements" t-value="0"/>
+                                                    <t t-foreach="events" t-as="event">
+                                                        <t t-if="event.territory_id.id == territory.id">
+                                                            <t t-set="cumulative_achievements"
+                                                               t-value="cumulative_achievements + 1"/>
+                                                        </t>
+                                                    </t>
+                                                    <t t-esc="cumulative_achievements"/>
+                                                    <t t-set="region_cumulative_achievements"
+                                                       t-value="region_cumulative_achievements + cumulative_achievements"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                    <tr>
+                                        <td colspan="100%" style="text-align: left; font-weight: bold;">
+                                            Total:
+<!--                                            <t t-esc="region_cumulative_achievements"/>-->
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

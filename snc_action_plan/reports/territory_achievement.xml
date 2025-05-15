@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_territory_achievement">
+            <t t-call="web.html_container">
+
+                <t t-if="rep_type == 'html'">
+                    <t t-call="snc_action_plan.snc_html_id"
+                       t-context="{'cname': company_name, 'cstreet': company_street}"/>
+                </t>
+
+                <t t-elif="rep_type == 'pdf'">
+                    <t t-call="snc_action_plan.snc_pdf_id"
+                       t-context="{'cname': company_name, 'cstreet': company_street}"/>
+                </t>
+
+                <t t-call="web.basic_layout">
+                    <div class="page">
+
+                        <h2 style="text-align: center; margin: 5px;
+                         padding-top: 20px; font-size: 15px;
+                            font-weight: bold; color: black;">
+                            Territory Wise Report
+                        </h2>
+
+                        <style>
+                            .custom-report-tables .table {
+                            font-size: 13px; /* Set font size */
+                            }
+                            .custom-report-tables .table td,
+                            .custom-report-tables .table th {
+                            border: none;
+                            background-color: transparent;
+                            }
+                            .custom-report-tables .fw-bold {
+                            font-weight: bold;
+                            }
+                            .custom-report-tables .first-header-font {
+                            text-align: left;
+                            }
+                        </style>
+
+                        <div class="custom-report-tables">
+                            <div class="row">
+
+                                <div class="col-2">
+                                    <table class="table table-sm table-borderless">
+                                        <tr>
+                                            <td class="p-1" style="white-space: nowrap;">
+                                                <strong>Date From:</strong>
+                                                <t t-esc="date_from"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-1" style="white-space: nowrap;">
+                                                <strong>Date To:</strong>
+                                                <t t-esc="date_to"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-1" style="white-space: nowrap;">
+                                                <strong>Region:</strong>
+                                                <t t-if="region_name">
+                                                    <t t-esc="region_name"/>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <div class="col-2">
+                                </div>
+
+                                <div class="col-2 offset-4">
+                                    <table class="table table-sm table-borderless">
+                                        <tr>
+                                            <td class="p-1">
+                                                <strong>Print By:</strong>
+                                            </td>
+                                            <td class="p-1">
+                                                <t t-esc="request.env.user.name"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-1" style="white-space: nowrap;">
+                                                <strong>Print Date/Time:</strong>
+                                            </td>
+                                            <td class="p-1" style="white-space: nowrap;">
+                                                <t t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y %H:%M')"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                          <style>table.table-custom { width: 100%; margin-top: 0px; border: 1px solid black;
+                            border-collapse: collapse; } table.table-custom th, table.table-custom td { border: 1px
+                            solid black; font-size: 12px; padding: 5px; } table.table-custom th { text-align: center;
+                            <!--                            font-weight: bold; text-transform: none; } table.table-custom td { text-align: center; }-->
+                            <!--                            table.table-custom td.text-center { text-align: center; } table.table-custom td.bg-transparent-->
+                            { background-color: transparent; } label { font-size: 16px; font-weight: bold; }
+                        </style>
+                            <table class="table table-sm table-bordered table-custom"
+                               style="color: black; margin-top: 20px;">
+                                <thead>
+                                    <tr>
+                                        <th style="color: black;border-right: 1px solid black;"><b>Territory</b></th>
+                                        <t t-foreach="event_type" t-as="head">
+                                            <th style="color: black;">
+                                                <t t-esc="head.name"/>
+                                            </th>
+                                        </t>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="territory" t-as="rec">
+                                        <tr>
+                                            <td class="fw-bold" align="left" style="border-right: 1px solid black;">
+                                                <t t-esc="rec.name"/>
+                                            </td>
+                                            <t t-foreach="event_type" t-as="event">
+                                                <td align="center">
+                                                    <t t-esc="len(achievement.filtered
+                                                    (lambda item: item.event_type_id.id == event.id and item.territory_id.id == rec.id))"
+                                                       t-options="{'widget': 'float', 'precision': 1, 'thousands_sep': ''}"/>
+                                                </td>
+                                            </t>
+                                        </tr>
+                                    </t>
+                                    <tr>
+                                        <td class="fw-bold" style="text-align:center;border-right: 1px solid black;">Total:</td>
+                                        <t t-foreach="event_type" t-as="head">
+                                            <td class="fw-bold" style="text-align:center;">
+                                                <t t-esc="len(achievement.filtered(lambda item: item.event_type_id.id == head.id))"
+                                                 t-options="{'widget': 'float', 'precision': 1, 'thousands_sep': ''}"/>
+                                            </td>
+                                        </t>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
