@@ -1,8 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access.gate.pass,access.gate.pass,model_gate_pass,base.group_user,1,1,1,1
-access.gate.product,access.gate.product,model_gate_product,base.group_user,1,1,1,1
-access_return.location,access_return.location,model_return_location,base.group_user,1,1,1,1
-access_returnable.valuation,access_returnable.valuation,model_returnable_valuation,base.group_user,1,1,1,1
-access_returnable.valuation.line,access_returnable.valuation.line,model_returnable_valuation_line,base.group_user,1,1,1,1
-
-
