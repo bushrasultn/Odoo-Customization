@@ -1,6 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_payment.instruction,snc_payment.instruction,model_payment_instruction,base.group_user,1,1,1,1
-access_partners.customization,snc_partners.customization,model_partners_customization,base.group_user,1,1,1,1
-access_instruction.lines,snc_instruction.lines,model_instruction_lines,base.group_user,1,1,1,1
-access_pymnt_instruction.method,snc_pymnt_instruction.method,model_pymnt_instruction_method,base.group_user,1,1,1,1
-access_custom.accounts,snc_custom.accounts,model_custom_accounts,base.group_user,1,1,1,1
