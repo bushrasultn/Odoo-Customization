@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="company_id_rule_bom" model="ir.rule">
+            <field name="name">Company Rules</field>
+            <field ref="model_bill_material" name="model_id"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+         <record id="company_id_ruleproduct_costimator" model="ir.rule">
+            <field name="name">Company Rules</field>
+            <field ref="model_product_costimator" name="model_id"/>
+            <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        </record>
+    </data>
+</odoo>

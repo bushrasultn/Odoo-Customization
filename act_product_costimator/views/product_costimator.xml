@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- ========================================================= -->
+    <!-- ACTION : Product Costimator                          -->
+    <!-- ========================================================= -->
+    <record id="action_product_costimator" model="ir.actions.act_window">
+        <field name="name">Product Costimator</field>
+        <field name="res_model">product.costimator</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ========================================================= -->
+    <!-- MAIN MENU : COSTIMATOR                                   -->
+    <!-- ========================================================= -->
+    <menuitem id="menu_product_costimator"
+              name="Product Costimator"
+              parent="menu_product_costimator_root"
+              action="action_product_costimator"
+              sequence="2"/>
+    <!-- ========================================================= -->
+    <!-- FORM VIEW                                                 -->
+    <!-- ========================================================= -->
+    <record id="view_product_costimator_form" model="ir.ui.view">
+        <field name="name">product.costimator.form</field>
+        <field name="model">product.costimator</field>
+        <field name="arch" type="xml">
+            <form string="Product Costimator">
+
+                <sheet>
+
+                    <!-- ================= BASIC INFO ================= -->
+                    <group>
+                        <group>
+                            <field name="reference_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="product_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="uom_id" options="{'no_create': True, 'no_open': True}" force_save="1"
+                                   readonly="1"/>
+                            <field name="costimator_qty"/>
+                        </group>
+                        <group>
+                            <field name="company_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="profit_margin"/>
+                            <field name="write_date" string="Date &amp; Time"/>
+                        </group>
+                    </group>
+                    <!-- ================= BASIC INFO ================= -->
+                    <!-- ================= COMPONENT LINES ================= -->
+                    <notebook>
+                        <page string="Components">
+
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="product_id" options="{'no_create': True, 'no_open': True}"/>
+                                    <field name="label_name"/>
+                                    <field name="uom_id" options="{'no_create': True, 'no_open': True}" force_save="1"
+                                           readonly="1"/>
+                                    <field name="costimator_line_qty" sum="Total"/>
+                                    <field name="current_avg_cost" force_save="1"
+                                           readonly="1"/>
+                                    <field name="total_avg_cost" sum="Total"/>
+                                    <field name="current_market_cost"/>
+                                    <field name="total_market_cost" sum="Total"/>
+                                </list>
+                            </field>
+
+                        </page>
+                    </notebook>
+                    <!--# ======================================================================================-->
+                    <!--#                                COMPUTED FIELDS-->
+                    <!--# ======================================================================================-->
+                    <group string="Costimator">
+                        <group string="Based on Current Cost">
+                            <!-- Changed text-left to text-end -->
+                            <field name="cost_per_unit" readonly="1" force_save="1" widget="badge"
+                                   decoration-danger="cost_per_unit > market_cost_per_unit" class="text-end"/>
+                            <field name="total_profit_margin" readonly="1" class="text-end"/>
+                            <field name="total_sale_price" readonly="1" force_save="1" class="text-end"/>
+                            <field name="sale_price_per_unit" readonly="1" force_save="1" class="text-end"/>
+                        </group>
+
+                        <group string="Based on Market Cost">
+                            <!-- Changed text-right to text-end for consistency -->
+                            <field name="market_cost_per_unit" class="text-end" readonly="1" force_save="1"
+                                   widget="badge"
+                                   decoration-danger="market_cost_per_unit > cost_per_unit"/>
+                            <field name="market_profit_margin" readonly="1" class="text-end"/>
+                            <field name="market_sale_price" readonly="1" force_save="1" class="text-end"/>
+                            <field name="market_sale_price_per_unit" readonly="1" force_save="1" class="text-end"/>
+                        </group>
+                    </group>
+                    <!--# ======================================================================================-->
+                    <!--#                                COMPUTED FIELDS-->
+                    <!--# ======================================================================================-->
+                </sheet>
+                <chatter reload_on_attachment="True"/>
+            </form>
+        </field>
+    </record>
+    <!-- ========================================================= -->
+    <!-- LIST VIEW                                                -->
+    <!-- ========================================================= -->
+    <record id="view_product_costimator_list" model="ir.ui.view">
+        <field name="name">product.costimator.list</field>
+        <field name="model">product.costimator</field>
+        <field name="arch" type="xml">
+            <list string="Product Costimator">
+                <field name="product_id"/>
+                <field name="reference_id"/>
+                <field name="uom_id"/>
+                <field name="costimator_qty"/>
+                <field name="profit_margin"/>
+                <field name="write_date" string="Date &amp; Time"/>
+                <field name="company_id"/>
+            </list>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+access_bill.material,act_bill.material,model_bill_material,base.group_user,1,1,1,1
+access_bill.material.lines,act_bill.material.lines,model_bill_material_lines,base.group_user,1,1,1,1
+
+access_product.costimator,act_product.costimator,model_product_costimator,base.group_user,1,1,1,1
+access_product.costimator.lines,act_product.costimator.lines,model_product_costimator_lines,base.group_user,1,1,1,1
+

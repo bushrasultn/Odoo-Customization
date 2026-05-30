@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- ===================================================== -->
+    <!-- ACTION -->
+    <!-- ===================================================== -->
+    <record id="action_bill_material" model="ir.actions.act_window">
+        <field name="name">Bill of Material</field>
+        <field name="res_model">bill.material</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ========================================================= -->
+    <!-- SUB MENU : Configuration                                  -->
+    <!-- ========================================================= -->
+    <menuitem id="menu_bill_material"
+              name="Configuration"
+              parent="menu_product_costimator_root"
+              action="action_bill_material"
+              sequence="3"/>
+
+    <!-- ===================================================== -->
+    <!-- FORM VIEW -->
+    <!-- ===================================================== -->
+    <record id="view_bill_material_form" model="ir.ui.view">
+        <field name="name">bill.material.form</field>
+        <field name="model">bill.material</field>
+        <field name="arch" type="xml">
+            <form string="Bill of Material">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="reference_name"/>
+                            <field name="product_id" options="{'no_create': True, 'no_open': True}"/>
+                            <field name="uom_id" options="{'no_create': True, 'no_open': True}" force_save="1"
+                                   readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="ref_qty"/>
+                            <field name="company_id" options="{'no_create': True, 'no_open': True}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Components">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="product_id" options="{'no_create': True, 'no_open': True}"/>
+                                    <field name="label_name"/>
+                                    <field name="uom_id" options="{'no_create': True, 'no_open': True}" force_save="1"
+                                           readonly="1"/>
+                                    <field name="ref_line_qty" sum="Total"/>
+                                    <field name="current_avg_cost" optional="hide" invisible="1"/>
+                                    <field name="current_market_cost" optional="hide" invisible="1"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+
+                </sheet>
+                <chatter reload_on_attachment="True"/>
+            </form>
+        </field>
+    </record>
+
+    <!-- ===================================================== -->
+    <!-- LIST VIEW -->
+    <!-- ===================================================== -->
+    <record id="view_bill_material_list" model="ir.ui.view">
+        <field name="name">bill.material.list</field>
+        <field name="model">bill.material</field>
+        <field name="arch" type="xml">
+            <list string="Bill of Material">
+                <field name="reference_name"/>
+                <field name="product_id"/>
+                <field name="uom_id"/>
+                <field name="ref_qty"/>
+                <field name="company_id"/>
+            </list>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- ========================================================= -->
+        <!-- ROOT MENU : COSTIMATOR                                   -->
+        <!-- ========================================================= -->
+        <menuitem id="menu_product_costimator_root"
+                  web_icon="act_product_costimator,static/description/costimator.png"
+                  name="Product Costimator"
+                  sequence="1"/>
+    </data>
+</odoo>
